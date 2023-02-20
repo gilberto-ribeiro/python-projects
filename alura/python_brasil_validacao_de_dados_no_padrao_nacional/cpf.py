@@ -1,16 +1,19 @@
 class Cpf:
 
     def __init__(self, documento):
-        self._cpf = self.valida_cpf(documento)
+        if self.valida_cpf(documento):
+            self._cpf = documento
+        else:
+            raise ValueError('CPF inválido')
 
     def __str__(self):
         return self.formata_cpf()
 
     def valida_cpf(self, documento):
         if len(str(documento)) == 11:
-            return documento
+            return True
         else:
-            raise ValueError('CPF inválido')
+            return False
         
     def formata_cpf(self):
         cpf_str = str(self._cpf)
