@@ -1,6 +1,7 @@
-from cpf_cnpj import CpfCnpj
-from validate_docbr import CNPJ
+from cpf_cnpj import Documento
 
-doc = CpfCnpj('51423928000110', 'cnpj')
+# doc = Documento.cria_documento('51423928000110')
+doc = Documento.cria_documento('11507568614')
 print(doc)
-print(doc.tipo_documento)
+print(doc.tipo)
+print(type(doc))

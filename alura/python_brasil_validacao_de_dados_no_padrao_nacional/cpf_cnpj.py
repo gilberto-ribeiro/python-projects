@@ -1,55 +1,62 @@
 from validate_docbr import CPF, CNPJ
 
 
-class CpfCnpj:
+class Documento:
 
-    def __init__(self, documento, tipo_documento='CPF'):
-        self.__tipo_documento = tipo_documento.upper()
+    @staticmethod
+    def cria_documento(documento):
         documento = str(documento)
-        self.instancia_documento(documento)
+        if len(documento) == 11:
+            return DocCPF(documento)
+        elif len(documento) == 14:
+            return DocCNPJ(documento)
+        else:
+            raise ValueError('Quantidade de dígitos inválida')
+
+
+class DocCPF:
+
+    def __init__(self, documento):
+        if self.valida(documento):
+            self.__cpf = documento
+        else:
+            raise ValueError('CPF inválido')
 
     def __str__(self):
-        if self.__tipo_documento == 'CPF':
-            return self.formata_cpf()
-        elif self.__tipo_documento == 'CNPJ':
-            return self.formata_cnpj()
-
-    def instancia_documento(self, documento):
-        if self.__tipo_documento == 'CPF':
-            if self.valida_cpf(documento):
-                self._cpf = documento
-            else:
-                raise ValueError('CPF inválido')
-        elif self.__tipo_documento == 'CNPJ':
-            if self.valida_cnpj(documento):
-                self._cnpj = documento
-            else:
-                raise ValueError('CNPJ inválido')
-        else:
-            raise ValueError('Tipo de documento inválido')
+        return self.formata()
 
     @property
-    def tipo_documento(self):
-        return self.__tipo_documento
+    def tipo(self):
+        return 'CPF'
 
-    def valida_cpf(self, documento):
-        if len(documento) == 11:
-            cpf = CPF()
-            return cpf.validate(documento)
-        else:
-            raise ValueError('Quantidade de dígitos inválida')
-
-    def valida_cnpj(self, documento):
-        if len(documento) == 14:
-            cnpj = CNPJ()
-            return cnpj.validate(documento)
-        else:
-            raise ValueError('Quantidade de dígitos inválida')
-        
-    def formata_cpf(self):
-        cpf = CPF()
-        return cpf.mask(self._cpf)
+    def valida(self, documento):
+        validador = CPF()
+        return validador.validate(documento)
     
-    def formata_cnpj(self):
-        cnpj = CNPJ()
-        return cnpj.mask(self._cnpj)
+    def formata(self):
+        mascara = CPF()
+        return mascara.mask(self.__cpf)
+    
+
+class DocCNPJ:
+
+    def __init__(self, documento):
+        if self.valida(documento):
+            self.__cnpj = documento
+        else:
+            raise ValueError('CNPJ inválido')
+
+    def __str__(self):
+        return self.formata()
+
+    @property
+    def tipo(self):
+        return 'CNPJ'
+
+    def valida(self, documento):
+        validador = CNPJ()
+        return validador.validate(documento)
+    
+    def formata(self):
+        mascara = CNPJ()
+        return mascara.mask(self.__cnpj)
