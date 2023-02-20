@@ -1,4 +1,6 @@
-from cpf import Cpf
+from cpf_cnpj import CpfCnpj
+from validate_docbr import CNPJ
 
-cpf = Cpf(11507568614)
-print(cpf)
+doc = CpfCnpj('51423928000110', 'cnpj')
+print(doc)
+print(doc.tipo_documento)
