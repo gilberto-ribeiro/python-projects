@@ -1,3 +1,6 @@
+# Refatorar futuramente, usando herança em classes e métodos de classe.
+
+
 from validate_docbr import CPF, CNPJ
 
 
