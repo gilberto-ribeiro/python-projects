@@ -8,5 +8,5 @@ import re
 # print(doc.tipo)
 # print(type(doc))
 
-num = TelefoneBR('12997429157')
+num = TelefoneBR('5112997429157')
 print(num)
