@@ -6,6 +6,7 @@ from estatistica_resumida import EstatisticaResumida
 from constantes import CODIGO_PRIORITARIO
 
 ClassesEstatistica = Union[EstatisticaDetalhada, EstatisticaResumida]
+Estatistica = Union[Dict[str, Union[int, str, List[str]]], Dict[str, int]]
 
 
 class FilaPrioritaria(FilaBase):
@@ -13,5 +14,5 @@ class FilaPrioritaria(FilaBase):
         self.senha_atual = f'{CODIGO_PRIORITARIO}{self.codigo}'
 
     def estatistica(self, classe_estatistica: ClassesEstatistica) \
-            -> Dict[str, Union[int, str, List[str]]]:
+            -> Estatistica:
         return classe_estatistica.retorna_estatistica(self.clientes_atendidos)
