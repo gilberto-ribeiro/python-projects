@@ -7,22 +7,22 @@ class FilaBase(metaclass=ABCMeta):
     clientes_atendidos: list = []
     senha_atual: str = ''
 
-    def reseta_fila(self) -> None:
-        if self.codigo >= 100:
-            self.codigo = 0
-        else:
-            self.codigo += 1
-
     def atualiza_fila(self) -> None:
-    # O método gera_senha_atual() é definido nas classes filhas.
+        # Template method.
         self.reseta_fila()
         self.gera_senha_atual()
         self.fila.append(self.senha_atual)
 
+    def reseta_fila(self) -> None:
+        if self.codigo >= 200:
+            self.codigo = 0
+        else:
+            self.codigo += 1
+
     @abstractmethod
-    def gera_senha_atual(self):
+    def gera_senha_atual(self) -> None:
         pass
 
     @abstractmethod
-    def chama_cliente(self, caixa):
+    def chama_cliente(self, caixa: int) -> str:
         pass
