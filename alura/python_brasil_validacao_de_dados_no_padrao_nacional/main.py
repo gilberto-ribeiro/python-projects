@@ -1,11 +1,7 @@
 from cpf_cnpj import Documento
 from telefones_br import TelefoneBR
-from datas_br import DataBR
+from datas_br import Cadastro
+from acesso_cep import BuscaEndereco
 
-
-cad = DataBR()
-print(cad)
-print(cad.dia)
-print(cad.dia_da_semana)
-print(cad.mes)
-print(cad.ano)
+moradia = BuscaEndereco(12600210)
+print(moradia)
