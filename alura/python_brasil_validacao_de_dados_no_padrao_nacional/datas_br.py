@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 
-class DataBR:
+class Cadastro:
 
     def __init__(self):
         self.__momento_cadastro = datetime.now()
