@@ -1,12 +1,13 @@
 from abc import ABCMeta, abstractmethod
+from typing import List
 
 from constantes import TAMANHO_PADRAO_MINIMO, TAMANHO_PADRAO_MAXIMO
 
 
 class FilaBase(metaclass=ABCMeta):
     codigo: int = 0
-    fila: list = []
-    clientes_atendidos: list = []
+    fila: List[str] = []
+    clientes_atendidos: List[str] = []
     senha_atual: str = ''
 
     def atualiza_fila(self) -> None:
@@ -21,10 +22,11 @@ class FilaBase(metaclass=ABCMeta):
         else:
             self.codigo += 1
 
-    @abstractmethod
-    def gera_senha_atual(self) -> None:
-        pass
+    def chama_cliente(self, caixa: int) -> str:
+        cliente_atual: str = self.fila.pop(0)
+        self.clientes_atendidos.append(cliente_atual)
+        return f'Cliente atual: {cliente_atual}. Dirija-se ao caixa: {caixa}.'
 
     @abstractmethod
-    def chama_cliente(self, caixa: int) -> str:
+    def gera_senha_atual(self) -> None:
         pass
